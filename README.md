@@ -26,3 +26,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - Dashboard
 - Manage billing/payment
 - Check if subscription is active
+
+## Things to add
+- protected routes
+- logout
+- multible subscription models
+- cleanup code

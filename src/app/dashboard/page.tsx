@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import Image from "next/image";
 import { authOptions } from "../api/auth/[...nextauth]/route"; // pull authoptions in another file so you dont use this wacky import
 import Stripe from "stripe";
 import {
@@ -48,7 +49,7 @@ export default async function Page() {
           </Link>
         </div>
 
-        <div className="">
+        <div className="pb-6">
           {hasSub ? (
             <div className="p-6 rounded-md border-emerald-400 border shadow-sm font-medium">
               Subscribed
@@ -62,6 +63,16 @@ export default async function Page() {
               >
                 Upgrade
               </Link>
+            </div>
+          )}
+        </div>
+
+        <div className="pb-6">
+          {hasSub ? (
+            <Image src="/doge.jpg" width={500} height={500} alt={""} />
+          ) : (
+            <div className="p-6 rounded-md border-zinc-400 border shadow-sm font-medium flex items-center gap-2">
+              You dont have access to the image
             </div>
           )}
         </div>
