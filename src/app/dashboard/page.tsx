@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { authOptions } from "../api/auth/[...nextauth]/route"; // pull authoptions in another file so you dont use this wacky import
-import Stripe from "stripe";
 import {
   createCheckoutLink,
   createCustomerIfNull,
@@ -9,15 +8,13 @@ import {
   hasSubscription,
 } from "../helpers/billing";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2023-08-16",
-});
-
-import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
+import { mustBeLoggedIn } from "../lib/auth";
 
 export default async function Page() {
+  await mustBeLoggedIn();
+
   const session = await getServerSession(authOptions);
 
   await createCustomerIfNull();

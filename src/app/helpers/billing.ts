@@ -2,15 +2,12 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import Stripe from "stripe";
 
-import { PrismaClient } from "@prisma/client";
-import { randomUUID } from "crypto";
-const prisma = new PrismaClient();
+import { prisma } from "@/app/lib/prisma";
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET!, {
   apiVersion: "2023-08-16",
 });
 
-//price_1NarR3APMZcBliJSoefCKTi5
 
 export async function hasSubscription() {
   const session = await getServerSession(authOptions);
